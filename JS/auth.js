@@ -177,7 +177,7 @@
             }
 
             sessionStorage.setItem(REGISTERED_NOTICE_KEY, "Account created. Log in with your email address and password.");
-            window.location.assign("index.html");
+            window.location.assign("login.php");
             return true;
         },
 
@@ -233,7 +233,7 @@
             sessionStorage.setItem(AUTH_KEY, "true");
             sessionStorage.setItem(ACCOUNT_ID_KEY, accountId);
             sessionStorage.setItem(USER_KEY, authenticatedAccount.name);
-            window.location.assign("landing.html");
+            window.location.assign("index.php");
             return true;
         }
     };
@@ -260,7 +260,7 @@
         });
 
         if (sessionStorage.getItem(AUTH_KEY) !== "true" || !accountId || !accountIsValid) {
-            window.location.replace("index.html");
+            window.location.replace("login.php");
             return;
         }
 
@@ -277,7 +277,7 @@
                 sessionStorage.removeItem(AUTH_KEY);
                 sessionStorage.removeItem(USER_KEY);
                 sessionStorage.removeItem(ACCOUNT_ID_KEY);
-                window.location.replace("index.html");
+                window.location.replace("login.php");
             });
         }
     });
