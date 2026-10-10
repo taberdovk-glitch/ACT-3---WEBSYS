@@ -129,6 +129,10 @@
         loginForm.elements.password.value = "";
     }
 
+    function getPageFileName(baseName, phpFallback) {
+        return window.location.pathname.endsWith(".php") ? phpFallback : baseName;
+    }
+
     window.BrewBloomAuth = {
         register: async function (name, email, password) {
             const normalizedEmail = email.trim().toLowerCase();
@@ -177,7 +181,7 @@
             }
 
             sessionStorage.setItem(REGISTERED_NOTICE_KEY, "Account created. Log in with your email address and password.");
-            window.location.assign("login.php");
+            window.location.assign(getPageFileName("login.html", "login.php"));
             return true;
         },
 
@@ -233,7 +237,7 @@
             sessionStorage.setItem(AUTH_KEY, "true");
             sessionStorage.setItem(ACCOUNT_ID_KEY, accountId);
             sessionStorage.setItem(USER_KEY, authenticatedAccount.name);
-            window.location.assign("index.php");
+            window.location.assign(getPageFileName("index.html", "index.php"));
             return true;
         }
     };
@@ -260,7 +264,7 @@
         });
 
         if (sessionStorage.getItem(AUTH_KEY) !== "true" || !accountId || !accountIsValid) {
-            window.location.replace("login.php");
+            window.location.replace(getPageFileName("login.html", "login.php"));
             return;
         }
 
@@ -277,7 +281,7 @@
                 sessionStorage.removeItem(AUTH_KEY);
                 sessionStorage.removeItem(USER_KEY);
                 sessionStorage.removeItem(ACCOUNT_ID_KEY);
-                window.location.replace("login.php");
+                window.location.replace(getPageFileName("login.html", "login.php"));
             });
         }
     });
